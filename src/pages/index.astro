@@ -1,16 +1,87 @@
----
+﻿---
+import Layout from "../layouts/Layout.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+import { Image } from "astro:assets";
+import uploadsBuddyScreenshot from "../assets/uploadsbuddy/uploadsbuddy-01-homepage-requirements.png";
+import docuMindScreenshot from "../assets/doccumind/01_documind_login.png";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Rahul Rathod" description="Rahul Rathod is a software developer and product builder creating practical software, backend systems, and AI-powered applications." activeRoute="/">
+  <section class="home-section home-about" id="about" aria-label="About">
+    <div class="content-wrap">
+      <h1 class="visually-hidden">About Rahul Rathod</h1>
+      <p class="lede">I'm Rahul, a software developer with a background in Python and backend engineering. I enjoy building practical software products, exploring new technologies and turning ideas into working applications.</p>
+      <p class="lede">My interests include backend systems, AI-powered applications, product development and solving everyday problems through software.</p>
+      <p class="lede">Recent projects include <a class="text-link" href="/work#documind">DocuMind</a> and <a class="text-link" href="/work#uploadsbuddy">UploadsBuddy</a>.</p>
+    </div>
+  </section>
+
+  <section class="home-section home-experience" id="experience" aria-labelledby="experience-heading">
+    <div class="content-wrap">
+      <h2 class="visually-hidden" id="experience-heading">Experience</h2>
+      <article class="experience-entry timeline-item">
+        <p class="experience-date">2021 – 2026</p>
+        <div class="experience-copy">
+          <h2>Python Developer</h2>
+          <p class="experience-employer">Tata Consultancy Services (TCS)</p>
+          <p>Worked in a Python-focused software support and backend environment.</p>
+          <ul class="inline-tags" aria-label="Relevant technologies"><li>Python</li><li>Django</li><li>Django REST Framework</li><li>REST APIs</li><li>PostgreSQL</li><li>Git</li></ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="home-section home-projects" id="projects" aria-labelledby="projects-heading">
+    <div class="content-wrap">
+      <h2 class="visually-hidden" id="projects-heading">Projects</h2>
+      <div class="work-list">
+        <article class="work-entry">
+          <a class="project-visual" href="https://uploadsbuddy.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit UploadsBuddy website">
+            <Image src={uploadsBuddyScreenshot} alt="UploadsBuddy homepage showing file requirements, dimension recognition and file selection" width={1920} height={895} loading="lazy" />
+          </a>
+          <div class="project-copy">
+            <header class="work-entry-head"><h3><a href="https://uploadsbuddy.com/" target="_blank" rel="noopener noreferrer">UploadsBuddy <span aria-hidden="true">↗</span></a></h3></header>
+            <p>A privacy-focused browser-based file preparation tool that helps users meet image and document requirements for online portals.</p>
+            <ul class="project-meta" aria-label="UploadsBuddy capabilities"><li>In-browser processing</li><li>Requirement validation</li><li>Batch workflows</li></ul>
+            <div class="project-links"><a class="case-link" href="/work#uploadsbuddy">Case study <span aria-hidden="true">→</span></a></div>
+          </div>
+        </article>
+        <article class="work-entry">
+          <a class="project-visual" href="https://doccumind.duckdns.org/" target="_blank" rel="noopener noreferrer" aria-label="Visit DocuMind website">
+            <Image src={docuMindScreenshot} alt="DocuMind login screen with its product introduction and account form" width={1920} height={900} loading="lazy" />
+          </a>
+          <div class="project-copy">
+            <header class="work-entry-head"><h3><a href="https://doccumind.duckdns.org/" target="_blank" rel="noopener noreferrer">DocuMind <span aria-hidden="true">↗</span></a></h3></header>
+            <p>An AI-powered document intelligence platform that enables users to interact with documents through retrieval-augmented generation.</p>
+            <ul class="project-meta" aria-label="DocuMind technologies"><li>Python</li><li>PostgreSQL</li><li>pgvector</li><li>RAG</li><li>Source references</li></ul>
+            <div class="project-links"><a class="case-link" href="/work#documind">Case study <span aria-hidden="true">→</span></a></div>
+          </div>
+        </article>
+      </div>
+      <p class="section-more"><a class="text-link" href="/work">Explore the case studies <span aria-hidden="true">↗</span></a></p>
+    </div>
+  </section>
+
+  <section class="home-section home-skills" id="skills" aria-labelledby="skills-heading">
+    <div class="content-wrap">
+      <h2 class="visually-hidden" id="skills-heading">Skills</h2>
+      <div class="capability-grid">
+        <article class="capability-group"><h3>Backend</h3><ul class="skill-list"><li>Python</li><li>Django</li><li>FastAPI</li><li>Django REST Framework</li></ul></article>
+        <article class="capability-group"><h3>Frontend</h3><ul class="skill-list"><li>Astro</li><li>React</li><li>TypeScript</li><li>Angular</li></ul></article>
+        <article class="capability-group"><h3>Databases</h3><ul class="skill-list"><li>PostgreSQL</li><li>Redis</li><li>pgvector</li></ul></article>
+        <article class="capability-group"><h3>AI / GenAI</h3><ul class="skill-list"><li>LLMs</li><li>RAG</li><li>Embeddings</li><li>LangChain</li></ul></article>
+        <article class="capability-group"><h3>Infrastructure</h3><ul class="skill-list"><li>Docker</li><li>AWS</li><li>Cloudflare</li><li>Celery</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section" id="contact" aria-label="Contact">
+    <div class="content-wrap">
+      <div class="contact-panel">
+        <h2>Let's connect.</h2>
+        <p>Have an interesting idea or want to discuss something? Feel free to reach out.</p>
+        <SocialLinks variant="contact" />
+      </div>
+    </div>
+  </section>
+</Layout>

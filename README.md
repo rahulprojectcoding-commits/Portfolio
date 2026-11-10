@@ -1,43 +1,41 @@
-# Astro Starter Kit: Minimal
+﻿# Rahul Rathod portfolio
+
+An Astro portfolio for a software developer and independent product builder. The design uses a dark editorial system with a persistent profile sidebar, section-based home navigation, and dedicated work, about, and contact routes.
+
+## Requirements
+
+- Node.js 22.23.4 or newer
+- npm
+
+## Development
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npx astro dev --background
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Manage the background server with:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+npx astro dev status
+npx astro dev logs
+npx astro dev stop
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Build
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```sh
+npm run build
+npm run preview
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Structure
 
-## 🧞 Commands
+- `src/pages/` contains the home page and dedicated work, about, contact, and résumé routes.
+- `src/layouts/Layout.astro` provides shared metadata, navigation, and footer.
+- `src/components/` contains the reusable sidebar navigation.
+- `src/styles/global.css` defines the dark palette, responsive layout, and shared styles.
+- `src/assets/` contains authentic product screenshots used in the project presentation.
+- `public/` contains the favicon, Open Graph card, and robots rules.
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Set `PUBLIC_SITE_URL` in the deployment environment to enable absolute canonical and Open Graph URLs. The production domain has not been provided yet.

@@ -1,0 +1,176 @@
+﻿---
+import "@fontsource-variable/geist";
+import "../styles/global.css";
+import Sidebar from "../components/Sidebar.astro";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  activeRoute?: string;
+}
+
+const {
+  title = "Rahul Rathod - Software Developer & Product Builder",
+  description = "Rahul Rathod builds practical software products, reliable backend systems, and AI-powered applications.",
+  activeRoute = Astro.url.pathname,
+} = Astro.props;
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
+const pageTitle = title.includes("Rahul Rathod") ? title : `${title} - Rahul Rathod`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111827" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {Astro.site && <meta property="og:image" content={new URL("/og-card.svg", Astro.site).toString()} />}
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <Sidebar activeRoute={activeRoute} />
+      <main id="main-content" class="main-pane" tabindex="-1"><slot /><footer class="site-footer"><span>Rahul Rathod · © {new Date().getFullYear()}</span><div class="footer-links"><a href="mailto:rahul42rathod@gmail.com">Email</a><a href="https://github.com/rahulprojectcoding-commits" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/rahul-v-rathod-06bab3239/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div><span class="footer-close">Thoughtful engineering, useful products and a quiet attention to detail.</span></footer></main>
+    </div>
+    <script>
+      const spotlightMedia = window.matchMedia("(pointer: fine) and (prefers-reduced-motion: no-preference)");
+
+      if (spotlightMedia.matches) {
+        let targetX = window.innerWidth / 2;
+        let targetY = window.innerHeight / 2;
+        let currentX = targetX;
+        let currentY = targetY;
+        let spotlightFrame = 0;
+
+        const paintSpotlight = () => {
+          currentX += (targetX - currentX) * 0.16;
+          currentY += (targetY - currentY) * 0.16;
+          document.body.style.setProperty("--spotlight-x", `${currentX}px`);
+          document.body.style.setProperty("--spotlight-y", `${currentY}px`);
+
+          if (Math.abs(targetX - currentX) > 0.4 || Math.abs(targetY - currentY) > 0.4) {
+            spotlightFrame = requestAnimationFrame(paintSpotlight);
+          } else {
+            spotlightFrame = 0;
+          }
+        };
+
+        window.addEventListener("pointermove", (event) => {
+          targetX = event.clientX;
+          targetY = event.clientY;
+          document.body.dataset.spotlightActive = "true";
+          if (!spotlightFrame) spotlightFrame = requestAnimationFrame(paintSpotlight);
+        }, { passive: true });
+
+        window.addEventListener("pointerleave", () => {
+          delete document.body.dataset.spotlightActive;
+        }, { passive: true });
+      }
+
+      const main = document.querySelector<HTMLElement>(".main-pane");
+      const sectionLinks = [...document.querySelectorAll<HTMLAnchorElement>("[data-section-link]")];
+      const sections = [...document.querySelectorAll<HTMLElement>(".home-section[id]")];
+
+      if (main && window.location.pathname.replace(/\/$/, "") === "" && "IntersectionObserver" in window) {
+        let pendingSectionId: string | null = null;
+        let pendingTimer = 0;
+
+        const readingLine = () => {
+          return window.innerHeight * 0.35;
+        };
+
+        const setActiveSection = (sectionId: string) => {
+          sectionLinks.forEach((link) => {
+            if (link.dataset.sectionLink === sectionId) link.setAttribute("aria-current", "location");
+            else link.removeAttribute("aria-current");
+          });
+        };
+
+        const updateActiveSection = () => {
+          const marker = readingLine();
+          if (pendingSectionId) {
+            const requested = document.getElementById(pendingSectionId);
+            const requestedBounds = requested?.getBoundingClientRect();
+            if (requestedBounds && requestedBounds.top <= marker && requestedBounds.bottom > marker) {
+              pendingSectionId = null;
+              window.clearTimeout(pendingTimer);
+            } else {
+              return;
+            }
+          }
+
+          let active = sections[0];
+          for (const section of sections) {
+            if (section.getBoundingClientRect().top <= marker) active = section;
+            else break;
+          }
+          const activeIndex = sections.indexOf(active);
+          const mappedSection = sections
+            .slice(0, activeIndex + 1)
+            .reverse()
+            .find((section) => sectionLinks.some((link) => link.dataset.sectionLink === section.id));
+          if (mappedSection) setActiveSection(mappedSection.id);
+        };
+
+        sectionLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            const sectionId = link.dataset.sectionLink;
+            if (!sectionId) return;
+            pendingSectionId = sectionId;
+            setActiveSection(sectionId);
+            window.clearTimeout(pendingTimer);
+            pendingTimer = window.setTimeout(() => {
+              pendingSectionId = null;
+              updateActiveSection();
+            }, 1400);
+          });
+        });
+
+        const createObserver = () => {
+          const rootHeight = window.innerHeight;
+          const topInset = Math.round(rootHeight * 0.35);
+          const bottomInset = Math.round(rootHeight * 0.64);
+          const observer = new IntersectionObserver(updateActiveSection, {
+            root: null,
+            rootMargin: `-${topInset}px 0px -${bottomInset}px 0px`,
+            threshold: 0,
+          });
+          sections.forEach((section) => observer.observe(section));
+          return observer;
+        };
+
+        let observer = createObserver();
+        window.addEventListener("resize", () => {
+          observer.disconnect();
+          observer = createObserver();
+          updateActiveSection();
+        }, { passive: true });
+
+        const interruptPendingNavigation = () => {
+          if (!pendingSectionId) return;
+          pendingSectionId = null;
+          window.clearTimeout(pendingTimer);
+          updateActiveSection();
+        };
+        window.addEventListener("wheel", interruptPendingNavigation, { passive: true });
+        window.addEventListener("touchstart", interruptPendingNavigation, { passive: true });
+        window.addEventListener("keydown", (event) => {
+          if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) interruptPendingNavigation();
+        });
+        updateActiveSection();
+      }
+    </script>
+  </body>
+</html>
+
+
+

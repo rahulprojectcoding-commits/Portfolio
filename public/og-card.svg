@@ -1,0 +1,12 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#111827"/>
+  <path d="M850 0h350v350H850z" fill="#1C2638"/>
+  <path d="M0 615h1200" stroke="#303A4D" stroke-width="2"/>
+  <rect x="88" y="82" width="54" height="54" rx="7" stroke="#59647B" stroke-width="2"/>
+  <text x="101" y="118" fill="#E8EAF2" font-family="Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="-2">RR</text>
+  <circle cx="135" cy="124" r="3" fill="#A5A6F6"/>
+  <text x="88" y="294" fill="#E8EAF2" font-family="Arial,sans-serif" font-size="72" font-weight="600" letter-spacing="-4">Rahul Rathod</text>
+  <text x="92" y="354" fill="#A5A6F6" font-family="Arial,sans-serif" font-size="26" font-weight="400">Software Developer &amp; Product Builder</text>
+  <text x="92" y="438" fill="#929CB0" font-family="Arial,sans-serif" font-size="22">Thoughtful engineering, useful products, quiet attention to detail.</text>
+  <text x="92" y="565" fill="#929CB0" font-family="monospace" font-size="15" letter-spacing="3">BACKEND · AI · INDEPENDENT PRODUCTS</text>
+</svg>

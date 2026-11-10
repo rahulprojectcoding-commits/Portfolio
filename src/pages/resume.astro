@@ -1,0 +1,64 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const resumeUrl = "/Rahul_Rathod_Resume.pdf";
+---
+
+<Layout title="Résumé" description="View or download Rahul Rathod’s original résumé PDF." activeRoute="/resume">
+  <section class="page-section resume-section-wrap" aria-labelledby="resume-title">
+    <div class="content-wrap resume-page">
+      <header class="resume-heading">
+        <div>
+          <h1 id="resume-title">Rahul Rathod — Résumé</h1>
+          <p class="resume-subtitle">Professional experience, technical skills and selected projects.</p>
+        </div>
+      </header>
+
+      <nav class="resume-actions" aria-label="Résumé actions">
+        <a class="button-link" href={resumeUrl} download="Rahul_Rathod_Resume.pdf">Download PDF <span aria-hidden="true">↓</span></a>
+        <button class="button-link" id="print-resume" type="button">Print Résumé <span aria-hidden="true">↗</span></button>
+        <a class="button-link" href={resumeUrl} target="_blank" rel="noopener noreferrer">Open in New Tab <span aria-hidden="true">↗</span></a>
+      </nav>
+      <p class="resume-print-status" id="resume-print-status" aria-live="polite" hidden></p>
+
+      <div class="resume-preview">
+        <iframe
+          src={`${resumeUrl}#view=FitH`}
+          title="Rahul Rathod résumé PDF"
+          loading="eager"
+          allow="fullscreen"
+        >
+          <p>Your browser can’t display the PDF here. <a class="text-link" href={resumeUrl} target="_blank" rel="noopener noreferrer">Open the original résumé PDF</a>.</p>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const printButton = document.querySelector<HTMLButtonElement>("#print-resume");
+    const printStatus = document.querySelector<HTMLElement>("#resume-print-status");
+    const pdfUrl = "/Rahul_Rathod_Resume.pdf";
+
+    printButton?.addEventListener("click", () => {
+      const printTab = window.open(pdfUrl, "_blank");
+      if (printTab) {
+        printTab.opener = null;
+        if (printStatus) {
+          printStatus.textContent = "Opening the original PDF’s print dialog. If it doesn’t appear, use the PDF viewer’s Print control.";
+          printStatus.hidden = false;
+        }
+        window.setTimeout(() => {
+          try {
+            printTab.focus();
+            printTab.print();
+          } catch {
+            if (printStatus) printStatus.textContent = "Use the PDF viewer’s Print control to print the original document.";
+          }
+        }, 1000);
+      } else if (printStatus) {
+        printStatus.textContent = "Your browser blocked the new tab. Choose Open in New Tab, then use the PDF viewer’s Print control.";
+        printStatus.hidden = false;
+      }
+    });
+  </script>
+</Layout>

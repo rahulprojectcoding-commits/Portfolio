@@ -1,0 +1,63 @@
+﻿---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import documindLogin from "../assets/doccumind/01_documind_login.png";
+---
+
+<Layout title="Projects" description="Project case studies for UploadsBuddy and DocuMind, practical software products focused on file preparation and document intelligence." activeRoute="/work">
+  <article class="page-section case-study" id="uploadsbuddy" aria-labelledby="uploadsbuddy-title">
+    <div class="content-wrap">
+      <h1 class="visually-hidden">Projects</h1>
+      <header class="case-header">
+        <div>
+          <h2 id="uploadsbuddy-title">UploadsBuddy</h2>
+          <p>A privacy-focused, browser-based tool for preparing files to meet image and document requirements on online portals.</p>
+        </div>
+        <span class="case-number">01</span>
+      </header>
+
+      <div class="case-subsections">
+        <section><h3>The problem</h3><p>Upload rules often combine dimensions, file size and format. People need a clear way to understand those constraints and prepare a file that satisfies them.</p></section>
+        <section><h3>The approach</h3><p>UploadsBuddy makes requirements explicit, checks a selected file, and guides preparation in the browser so the user can download a ready-to-use result.</p></section>
+        <section><h3>Core capabilities</h3><ul><li>Requirement-based image and document validation</li><li>Dimension and file-size checks</li><li>Browser-based preparation and batch workflows</li></ul></section>
+        <section><h3>Product focus</h3><p>Keep the workflow understandable, make file requirements visible, and keep processing on the user’s device.</p></section>
+      </div>
+
+      <div class="case-footer-row">
+        <div><span class="detail-label">PRODUCT CAPABILITIES</span><ul class="skill-list case-tech-list"><li>In-browser processing</li><li>Validation</li><li>Batch preparation</li></ul></div>
+        <a class="button-link" href="https://uploadsbuddy.com/" target="_blank" rel="noopener noreferrer">Live Demo <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </article>
+
+  <article class="page-section case-study" id="documind" aria-labelledby="documind-title">
+    <div class="content-wrap">
+      <header class="case-header">
+        <div>
+          <h2 id="documind-title">DocuMind</h2>
+          <p>An AI-powered document intelligence application that lets users interact with uploaded documents through retrieval-augmented generation.</p>
+        </div>
+        <span class="case-number">02</span>
+      </header>
+
+      <div class="case-subsections">
+        <section><h3>The problem</h3><p>Important information can be difficult to locate across a collection of documents. A useful answer also needs to show where its information came from.</p></section>
+        <section><h3>The approach</h3><p>DocuMind uses retrieval-augmented generation to find relevant document context, produce a contextual response, and expose source references for inspection.</p></section>
+        <section><h3>Core capabilities</h3><ul><li>Document ingestion and text extraction</li><li>Chunking, embeddings and semantic retrieval</li><li>Question answering with page-level references</li><li>Tenant-scoped document retrieval</li></ul></section>
+        <section><h3>Architecture overview</h3><p>Documents are ingested and prepared for retrieval. A question is matched with relevant context, then passed into answer generation alongside the retrieved source material. Tenant scope is part of the retrieval boundary.</p></section>
+      </div>
+
+      <figure class="case-image">
+        <Image src={documindLogin} alt="DocuMind login screen, with its product introduction and account form" width={1920} height={900} loading="lazy" />
+        <figcaption>DocuMind sign-in screen.</figcaption>
+      </figure>
+
+      <div class="case-footer-row">
+        <div><span class="detail-label">RELATED TECHNOLOGIES</span><ul class="skill-list case-tech-list"><li>Python</li><li>Django REST Framework</li><li>PostgreSQL</li><li>pgvector</li><li>Redis</li><li>Celery</li><li>RAG</li></ul></div>
+        <div class="project-links"><a class="button-link" href="https://doccumind.duckdns.org/" target="_blank" rel="noopener noreferrer">Live Demo <span aria-hidden="true">↗</span></a><a class="button-link" href="https://github.com/rahulprojectcoding-commits/documind" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </div>
+  </article>
+
+</Layout>
+

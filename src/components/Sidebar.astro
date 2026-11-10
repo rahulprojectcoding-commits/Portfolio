@@ -1,0 +1,49 @@
+---
+interface Props { activeRoute: string }
+import SocialLinks from "./SocialLinks.astro";
+const { activeRoute } = Astro.props;
+const routePath = activeRoute.replace(/\/$/, "") || "/";
+const home = routePath === "/";
+const nav = [
+  { number: "01", label: "About", href: home ? "#about" : "/#about", route: "/about", section: "about" },
+  { number: "02", label: "Experience", href: home ? "#experience" : "/#experience", route: "", section: "experience" },
+  { number: "03", label: "Projects", href: home ? "#projects" : "/work", route: "/work", section: "projects" },
+  { number: "04", label: "Skills", href: home ? "#skills" : "/#skills", route: "", section: "skills" },
+  { number: "05", label: "Contact", href: home ? "#contact" : "/contact", route: "/contact", section: "contact" },
+  { number: "06", label: "Resume", href: "/resume", route: "/resume" },
+];
+---
+
+<aside class="profile-sidebar" aria-label="Profile and site navigation">
+  <div class="profile-inner">
+    <div class="profile-copy">
+      <h2>Rahul Rathod</h2>
+      <p class="profile-role">Software Developer<br />&amp; Product Builder</p>
+      <p class="profile-intro">I build practical digital products and AI-powered applications, with a focus on backend engineering.</p>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      {nav.map((item) => {
+        const current = routePath === item.route && item.route !== "";
+        return (
+          <a
+            href={item.href}
+            class:list={["sidebar-link", { "is-current": current }]}
+            aria-current={current ? "page" : undefined}
+            data-section-link={home && item.section ? item.section : undefined}
+          >
+            <span class="sidebar-link-number">{item.number}</span>
+            <span>{item.label}</span>
+            <span class="sidebar-link-rule" aria-hidden="true"></span>
+          </a>
+        );
+      })}
+    </nav>
+
+    <div class="profile-bottom">
+      <p class="profile-bottom-label">SAY HELLO</p>
+      <SocialLinks variant="sidebar" />
+      <p class="profile-note">Useful products, built with care.</p>
+    </div>
+  </div>
+</aside>
